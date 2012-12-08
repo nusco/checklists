@@ -13,8 +13,7 @@ end
 checklists.shift # remove comments
 
 OUTPUT_DIR = ARGV.empty? ? "output" : ARGV.shift
-require 'fileutils'; FileUtils.rm_rf OUTPUT_DIR
-Dir.mkdir OUTPUT_DIR
+Dir.mkdir(OUTPUT_DIR) unless Dir.exist?(OUTPUT_DIR)
 
 checklists.each do |list|
   name = list.shift.strip
