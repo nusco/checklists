@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+lines = File.readlines("checklists.txt")
+            .map {|l| l.chomp.strip }
+            .reject {|l| l.empty? }
+
+checklists = [["comments"]]
+lines.each do |l|
+  checklists << [] if l =~ /^=+/ # new checklist
+  checklists.last << l.gsub(/^=+/, '')
+end
+checklists.shift # remove comments
+
+OUTPUT_DIR = 'output'
+require 'fileutils'; FileUtils.rm_rf OUTPUT_DIR
+Dir.mkdir OUTPUT_DIR
+
+checklists.each do |list|
+  name = list.shift.strip
+  File.open("#{OUTPUT_DIR}/#{name}.html".downcase.gsub(/ /, '_'), 'w') do |f|
+    f.puts "<p style=\"font-size:50pt;\">#{name} Checklist</h1></p>"
+    list.each {|item| f.puts "<p style=\"font-size:30pt;\">&#9633 #{item}</p>" }
+  end
+end
+
+exec "open #{OUTPUT_DIR}"
