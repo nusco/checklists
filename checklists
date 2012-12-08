@@ -23,5 +23,3 @@ checklists.each do |list|
     list.each {|item| f.puts "<p style=\"font-size:30pt;\">&#9633 #{item}</p>" }
   end
 end
-
-exec "open #{OUTPUT_DIR}"
