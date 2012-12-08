@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-source = ARGV.empty? ? "checklists.txt" : ARGV[0]
+source = ARGV.empty? ? "checklists.txt" : ARGV.shift
 lines = File.readlines(source)
             .map {|l| l.chomp.strip }
             .reject {|l| l.empty? }
@@ -12,7 +12,7 @@ lines.each do |l|
 end
 checklists.shift # remove comments
 
-OUTPUT_DIR = 'output'
+OUTPUT_DIR = ARGV.empty? ? "output" : ARGV.shift
 require 'fileutils'; FileUtils.rm_rf OUTPUT_DIR
 Dir.mkdir OUTPUT_DIR
 
