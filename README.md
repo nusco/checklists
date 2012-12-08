@@ -5,6 +5,6 @@ A quick Ruby script to generate HTML checklists from a text file.
 
 To use:
 
-    checklists
+    checklists <filename>
     
-The source of the checklists is in checklists.txt.
+The default filename is *checklists.txt*.

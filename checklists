@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
-lines = File.readlines("checklists.txt")
+source = ARGV.empty? ? "checklists.txt" : ARGV[0]
+lines = File.readlines(source)
             .map {|l| l.chomp.strip }
             .reject {|l| l.empty? }
 
