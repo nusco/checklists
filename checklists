@@ -1,24 +1,23 @@
 #!/usr/bin/env ruby
 
-source = ARGV.empty? ? "checklists.txt" : ARGV.shift
-lines = File.readlines(source)
+lines = File.readlines(ARGV.shift || "checklists.txt")
             .map {|l| l.chomp.strip }
             .reject {|l| l.empty? }
 
 checklists = [["comments"]]
 lines.each do |l|
   checklists << [] if l =~ /^=+/ # new checklist
-  checklists.last << l.gsub(/^=+/, '')
+  checklists.last << l.gsub(/^[= ]+/, '')
 end
 checklists.shift # remove comments
 
-OUTPUT_DIR = ARGV.empty? ? "output" : ARGV.shift
+OUTPUT_DIR = ARGV.shift || "output"
 Dir.mkdir(OUTPUT_DIR) unless Dir.exist?(OUTPUT_DIR)
 
 checklists.each do |list|
-  name = list.shift.strip
+  name = list.shift
   File.open("#{OUTPUT_DIR}/#{name}.html".downcase.gsub(/ /, '_'), 'w') do |f|
-    f.puts "<p style=\"font-size:50pt;\">#{name} Checklist</h1></p>"
+    f.puts "<p style=\"font-size:50pt;\">#{name} Checklist</p>"
     list.each {|item| f.puts "<p style=\"font-size:30pt;\">&#9633 #{item}</p>" }
   end
 end
