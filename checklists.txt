@@ -1,8 +1,7 @@
-This is our checklists source file.
-To generate the lists: "ruby checklists.rb".
+This is an example checklists source file.
 
 Each checklist begins with one or more "=" characters and the name of the list. Then the checklist items, one by one.
-Empty space and lines before the first checklist (such as this one) are ignored.
+Empty space and lines before the first checklist (such as these ones) are ignored.
 
 === Daily
 We did this
